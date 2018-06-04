@@ -14,7 +14,6 @@
 #include "userdata_devel.h"                                                     // Load external configuration file
 #include <Arduino.h>
 #include <TimeLib.h>
-#include <NtpClientLib.h>
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 #include <WiFiClient.h>
@@ -57,39 +56,6 @@ ESP8266WebServer server(80);                                                    
 //************* CONFIG OTA *******************************************************************************
 //********************************************************************************************************
 ESP8266HTTPUpdateServer httpUpdater;
-
-//************* CONNECT TO WIFI AND NTP ******************************************************************
-//********************************************************************************************************
-void onSTAGotIP(WiFiEventStationModeGotIP ipInfo) {                             // Start NTP only after IP network is connected
-  int8_t myTimeZone = timeZone;
-  Serial.printf("IP address is  %s\r\n", ipInfo.ip.toString().c_str());
-  NTP.begin(ntpServerName, timeZone, true);
-  NTP.setInterval(86400000);                                                    // resync after 86400000 milliseconds (24 hours)
-}
-
-void onSTADisconnected(WiFiEventStationModeDisconnected event_info) {           // Manage network disconnection
-  Serial.printf("Disconnected from %s\n", event_info.ssid.c_str());
-  Serial.printf("Reason: %d\n", event_info.reason);
-  digitalWrite(ONBOARD_LED, HIGH);                                              // Turn off internal LED
-  //NTP.stop(); // NTP sync disabled to avoid sync errors if no wifi
-}
-
-void processSyncEvent(NTPSyncEvent_t ntpEvent) {                                // Manage NTP disconnection
-  if (ntpEvent) {
-    Serial.print("Time Sync error: ");
-    if (ntpEvent == noResponse)
-      Serial.println("NTP server not reachable");
-    else if (ntpEvent == invalidAddress)
-      Serial.println("Invalid NTP server address");
-  }
-  else {
-    Serial.print("Got NTP time: ");
-    Serial.println(NTP.getTimeDateString(NTP.getLastNTPSync()));
-  }
-}
-
-boolean syncEventTriggered = false;                                             // True if time event has been triggered
-NTPSyncEvent_t ntpEvent;                                                        // Last triggered event
 
 //************* RECONNECT MQTT ***************************************************************************
 //********************************************************************************************************
