@@ -1,17 +1,15 @@
 /**
- * File contents of "ota.h" for MAID - Door and Window Sensor
+ * File contents of "ota.h" for DUMB2SMART
  *
  * This file is used to create the folowing webpages:
  * Root page ("/"), reset page ("/reset") and "page not found"
- *
- * For more information visit https://github.com/jorgeassuncao/MAID-DWS
  */
 
-  ArduinoOTA.setPort(8266);    // Port defaults to 8266
+  ArduinoOTA.setPort(8266);                                                     // Port defaults to 8266
 
-  ArduinoOTA.setHostname(DEVICE_HOSTNAME);   // Hostname defaults to esp8266-[ChipID]
+  ArduinoOTA.setHostname(DEVICE_HOSTNAME);                                      // Hostname defaults to esp8266-[ChipID]
 
-  ArduinoOTA.setPassword(ACCESS_PASSWORD);  // No authentication by default
+  ArduinoOTA.setPassword(ACCESS_PASSWORD);                                      // No authentication by default
 
   ArduinoOTA.onStart([]() {
     String type;
