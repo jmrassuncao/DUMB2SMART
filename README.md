@@ -9,3 +9,6 @@ Current version is: _DUMB2SMART v0.0.1 (04/06/2018)_
 
 ### Features
 n/a
+
+### How it works
+n/a
