@@ -11,7 +11,7 @@
 
 //************* INCLUDE LIBRARIES ************************************************************************
 //********************************************************************************************************
-#include "userdata_devel.h"                                                      // Load external configuration file
+#include "userdata_devel.h"                                                     // Load external configuration file
 #include <Arduino.h>
 #include <TimeLib.h>
 #include <NtpClientLib.h>
@@ -28,21 +28,12 @@
 
 //************* PROJECT AND VERSION **********************************************************************
 //********************************************************************************************************
-const char* proj_ver = "DUMB2SMART (04/06/2018)";   // Project name and version
+const char* proj_ver = "DUMB2SMART (04/06/2018)";                               // Project name and version
 
 //************* GLOBAL VARIABLES *************************************************************************
 //********************************************************************************************************
 byte mac[6];                                                                    // Variable - MAC address
 char myBuffer[15];                                                              // Variable - MAC string buffer
-
-const char* doorState;                                                          // Variable - The state of the door
-String doorStateTimeDate;
-
-long unsigned int lowIn;                                                        // Time when the sensor outputs a low impulse
-long unsigned int pause = 100;                                                  // Millis the sensor has to be low to assume detection has stopped
-
-boolean lockLow = false;                                                        // Sensor variables
-boolean takeLowTime;
 
 //************* CREATE DEBUG *****************************************************************************
 //********************************************************************************************************
@@ -275,7 +266,7 @@ void loop() {
   client.loop();                                                                // Fixes some stability issues with wifi connections
 
   // Code goes here!
-  
+
   /* code */
 
   Debug.handle();                                                               // Remote debug over telnet
@@ -286,4 +277,3 @@ void loop() {
 
 // END
 //********************************************************************************************************
-
