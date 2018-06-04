@@ -168,7 +168,7 @@ void setup() {
   Serial.println("WiFi connected!");                                            // Send successful connection to serial interface
   Debug.println("WiFi connected!");                                             // Send successful connection to telnet debug interface
   delay(1000);
-  digitalWrite(ONBOARD_LED, LOW); delay(250); digitalWrite(ONBOARD_LED, HIGH);    // Blink internal LED
+  digitalWrite(ONBOARD_LED, LOW); delay(250); digitalWrite(ONBOARD_LED, HIGH);  // Blink internal LED
   Serial.println();                                                             // Block space to serial interface
   Debug.println();                                                              // Block space to telnet debug interface
 

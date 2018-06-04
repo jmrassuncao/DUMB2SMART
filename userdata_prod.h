@@ -1,8 +1,7 @@
 /**
- * File contents of "userdata_devel.h" for MAID - Door and Window Sensor
+ * File contents of "userdata_devel.h" for DUMB2SMART
  *
  * This file is used to change the userdata to meet your needs
- * For more information visit https://github.com/jorgeassuncao/MAID-DWS
  */
 
 //************ CONFIG WIFI *******************************************************************************
@@ -10,8 +9,8 @@
 // and Hostname must be unique inside your network
 //********************************************************************************************************
   #ifndef WIFI_CONFIG_H
-  #define YOUR_WIFI_SSID "wifinet"                                             // Wifi SSID
-  #define YOUR_WIFI_PASSWD "wifipass"                                         // Wifi password
+  #define YOUR_WIFI_SSID "wifinet"                                              // Wifi SSID
+  #define YOUR_WIFI_PASSWD "wifipass"                                           // Wifi password
   #endif // !WIFI_CONFIG_H
 
 // If you want to use a fixed IP address, open "wifiConfig.h" and edit lines 123, 124 and 125

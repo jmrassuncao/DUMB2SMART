@@ -3,7 +3,6 @@
  *
  * This file is used to create the folowing webpages:
  * Root page ("/"), reset page ("/reset") and "page not found"
- *
  */
 
  String getPage(){
