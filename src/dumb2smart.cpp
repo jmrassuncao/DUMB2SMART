@@ -66,7 +66,8 @@ void mqttConnect() {
     Debug.printf("Starting MQTT Client... ");                                   // Send text to telnet debug interface
     if (client.connect(
       DEVICE_HOSTNAME, MQTT_USERNAME, MQTT_PASSWORD,
-      MQTT_WILL_TOPIC, MQTT_WILL_QOS, MQTT_WILL_RETAIN, MQTT_WILL_MESSAGE)) {   // Connect to MQTT broker
+      MQTT_WILL_TOPIC, MQTT_WILL_QOS, MQTT_WILL_RETAIN,
+      MQTT_WILL_MESSAGE_OFF)) {                                                 // Connect to MQTT broker
       delay(1000);                                                              // Wait 1 second
       digitalWrite(ONBOARD_LED, LOW); delay(250);                               // Blink internal LED
       digitalWrite(ONBOARD_LED, HIGH);                                          // ...
@@ -76,6 +77,8 @@ void mqttConnect() {
       Serial.println();                                                         // Block space to serial interface
       Debug.println();                                                          // Block space to telnet debug interface
       digitalWrite(ONBOARD_LED, LOW);                                           // Turn on internal LED
+      client.publish(MQTT_WILL_TOPIC, MQTT_WILL_MESSAGE_ON); 
+      Serial.println(" Published!");
     } else {
       Serial.print("failed, rc=");                                              // Send text to serial interface
       Debug.printf("failed, rc=");                                              // Send text to telnet debug interface
@@ -192,7 +195,7 @@ void setup() {
   Debug.println();                                                              // Block space to telnet debug interface
 
   ArduinoOTA.begin();                                                           // Start OTA over wifi
-  #include "ota.h"                                                                // Include OTA file
+  #include "ota.h"                                                              // Include OTA file
 
   client.setServer(MQTT_SERVER, MQTT_PORT);                                     // Start MQTT client
 
@@ -204,7 +207,7 @@ void loop() {
 
   server.handleClient();                                                        // Handle http requests
 
-  Breathe.set(B_LEDPIN, HIGH, 1, 5 );                                           // Breathe the external blue LED
+  Breathe.set(ONBOARD_LED, HIGH, 1, 5 );                                           // Breathe the external blue LED
 
   ArduinoOTA.handle();                                                          // Handle OTA requests via wifi
 
