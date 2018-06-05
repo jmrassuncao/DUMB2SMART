@@ -7,8 +7,25 @@ Current version is: _DUMB2SMART v0.0.1 (04/06/2018)_
 
 ### Features
   - OTA updates
+  - Remote Debug
 
 ### How it works
+The ESP-01 should be connected to the device you want to get the state.
+
+If you're using Home Assistant, just add this code:
+
+```yaml
+binary_sensor:
+#### GET DEVICE STATE
+  - platform: mqtt
+    name: "dumb2smart"
+    state_topic: "home/test/status"
+    value_template: "{{ value }}"
+    payload_on: "Online"
+    payload_off: "Offline"
+    device_class: connectivity
+```
+
 To use the OTA feature, navigate to http://<ipaddress>/firmware
 
 ### Notes
