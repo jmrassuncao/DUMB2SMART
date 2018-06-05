@@ -26,7 +26,7 @@ binary_sensor:
     device_class: connectivity
 ```
 
-To use the OTA feature, navigate to http://<ipaddress>/firmware
+To use the OTA feature, navigate to http://<<node_ip_address>>/firmware
 
 ### Notes
 This project was created on PlatformIO. If you are using Arduino IDE, you should open the _.cpp_ file inside the _src_ folder. Libraries are inside the _lib_ folder.
