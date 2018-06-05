@@ -101,14 +101,6 @@ void setup() {
   pinMode(ONBOARD_LED, OUTPUT);                                                 // Set internal LED as output
   digitalWrite(ONBOARD_LED, HIGH);                                              // Switch off LED
 
-  NTP.onNTPSyncEvent([](NTPSyncEvent_t event) {                                 // When NTP syncs...
-    ntpEvent = event;                                                           // ...mark as triggered
-    syncEventTriggered = true;                                                  // False if time event has been triggered
-  });
-
-  e1 = WiFi.onStationModeGotIP(onSTAGotIP);                                     // Start NTP only after IP network is connected
-  e2 = WiFi.onStationModeDisconnected(onSTADisconnected);                       // Manage network disconnection
-
   Serial.begin(115200);                                                         // Start serial interface
   Serial.println();                                                             // Send space to serial interface
   Debug.println();                                                              // Send space to telnet debug interface
@@ -200,13 +192,9 @@ void setup() {
   Debug.println();                                                              // Block space to telnet debug interface
 
   ArduinoOTA.begin();                                                           // Start OTA over wifi
-  #include "ota.h"                                                              // Include OTA file
+  #include "ota.h"                                                                // Include OTA file
 
   client.setServer(MQTT_SERVER, MQTT_PORT);                                     // Start MQTT client
-
-  delay(2000);                                                                  // Wait 2 seconds
-  Serial.print("Daylight Saving period is ");                                   // Send text to serial interface
-  Serial.println(NTP.isSummerTime() ? "Summer Time" : "Winter Time");           // Send text to serial interface
 
 }
 
@@ -218,12 +206,7 @@ void loop() {
 
   Breathe.set(B_LEDPIN, HIGH, 1, 5 );                                           // Breathe the external blue LED
 
-  ArduinoOTA.handle();  // Handle OTA requests via wifi
-
-  if (syncEventTriggered) {                                                     // If NTP not sync'ed...
-    processSyncEvent(ntpEvent);                                                 // ...sync it again
-    syncEventTriggered = false;                                                 // True if time event has been triggered
-  }
+  ArduinoOTA.handle();                                                          // Handle OTA requests via wifi
 
   if (!client.connected()) {                                                    // If MQTT client disconnects...
     mqttConnect();                                                              // ...connect again
