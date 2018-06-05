@@ -11,7 +11,7 @@
 
 //************* INCLUDE LIBRARIES ************************************************************************
 //********************************************************************************************************
-#include "userdata_devel.h"                                                     // Load external configuration file
+#include "userdata_prod.h"                                                     // Load external configuration file
 #include <Arduino.h>
 #include <TimeLib.h>
 #include <ESP8266WiFi.h>
@@ -77,7 +77,7 @@ void mqttConnect() {
       Serial.println();                                                         // Block space to serial interface
       Debug.println();                                                          // Block space to telnet debug interface
       digitalWrite(ONBOARD_LED, LOW);                                           // Turn on internal LED
-      client.publish(MQTT_WILL_TOPIC, MQTT_WILL_MESSAGE_ON); 
+      client.publish(MQTT_WILL_TOPIC, MQTT_WILL_MESSAGE_ON);
       Serial.println(" Published!");
     } else {
       Serial.print("failed, rc=");                                              // Send text to serial interface
